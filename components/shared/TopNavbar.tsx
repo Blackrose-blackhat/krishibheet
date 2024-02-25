@@ -17,6 +17,7 @@ import {
 import Image from "next/image";
 import { PinLeftIcon, TriangleRightIcon } from "@radix-ui/react-icons";
 import { Button } from "../ui/button";
+import { usePathname } from "next/navigation";
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -70,6 +71,7 @@ const components2: { title: string; href: string; description: string }[] = [
 
 
 export function TopNavBar() {
+  const pathName = usePathname();
   return (
     <div className="flex flex-row items-center justify-center px-5 py-2 bg-white/50">
       <Image src={logo} height={90} width={90} alt="logo" className="p-2" />
@@ -134,7 +136,8 @@ export function TopNavBar() {
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
-          <NavigationMenuItem>
+          {pathName == "/consumer" && (
+            <NavigationMenuItem>
             <NavigationMenuTrigger>Storage spaces </NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
@@ -159,6 +162,8 @@ export function TopNavBar() {
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
+          )}
+          
         </NavigationMenuList>
       </NavigationMenu>
     </div>
